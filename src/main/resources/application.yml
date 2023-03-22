@@ -1,9 +1,25 @@
 debug: true
+
 server:
   port: 8000
 spring:
+  application:
+    name: demo
   rabbitmq:
     host: localhost
     port: 5672
-    username: guest
-    password: guest
+    virtual-host: /demo
+    username: root
+    password: root
+    # 异步确认回调
+    publisher-confirm-type: correlated
+    # 需要ack
+    publisher-returns: true
+    template:
+      # 投递失败时 调用 ReturnCallback
+      mandatory: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/demo
+    username: root
+    password: root
+
