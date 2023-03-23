@@ -22,4 +22,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/demo
     username: root
     password: root
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    ssl: ${REDIS_SSL:false}
+    database: ${REDIS_DATABASE:0}
 
