@@ -1,10 +1,12 @@
 package com.gxf.demo.service;
 
+import com.gxf.demo.enumeration.RabbitMqExchangeEnumeration;
+import com.gxf.demo.enumeration.RoutingKeyEnumeration;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -13,17 +15,20 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class MessageQueueServiceImpl implements MessageQueueService {
 
-    @Resource
-    private AmqpTemplate amqpTemplate;
+    private final AmqpTemplate amqpTemplate;
 
-    @Override
-    public void sendMessage(String message) {
-        String test = "test_massage";
-        amqpTemplate.send(new Message(test.getBytes(StandardCharsets.UTF_8)));
+    @Autowired
+    public MessageQueueServiceImpl(AmqpTemplate amqpTemplate) {
+        this.amqpTemplate = amqpTemplate;
     }
 
-    public void sendMessageWithRoutingKey(String routingKey, String message) {
-        String test = "test_massage";
-        amqpTemplate.send(routingKey, new Message(test.getBytes(StandardCharsets.UTF_8)));
+    @Override
+    public void sendDirectMessage(String message) {
+        amqpTemplate.convertAndSend(RabbitMqExchangeEnumeration.DIRECT_EXCHANGE.getCode(), RoutingKeyEnumeration.DIRECT_KEY.getCode(), message);
+    }
+
+    @Override
+    public void sendMessageWithRoutingKeyAndExchangeKey(RabbitMqExchangeEnumeration exchangeKey, RoutingKeyEnumeration routingKey, String message) {
+        amqpTemplate.send(exchangeKey.getCode(), routingKey.getCode(), new Message(message.getBytes(StandardCharsets.UTF_8)));
     }
 }
