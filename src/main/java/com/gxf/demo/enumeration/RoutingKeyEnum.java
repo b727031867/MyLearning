@@ -8,30 +8,25 @@ import lombok.extern.slf4j.Slf4j;
  * @author GXF
  */
 @Slf4j
-public enum RoutingKeyEnumeration {
+public enum RoutingKeyEnum {
     /**
      * 直连交换机的路由测试key
      */
-    DIRECT_KEY("DIRECT_ROUTE_KEY", "test"),
+    DIRECT_KEY("DIRECT_ROUTE_KEY"),
 
     /**
      * 主题交换机的路由测试key
      */
-    TOPIC_KEY("TOPIC_KEY", "test");
+    TOPIC_KEY("TOPIC_KEY");
 
     private final String code;
-    private final String name;
 
-    RoutingKeyEnumeration(String code, String name) {
+    RoutingKeyEnum(String code) {
         this.code = code;
-        this.name = name;
     }
 
     public String getCode() {
         return code;
     }
 
-    public String getName() {
-        return name;
-    }
 }

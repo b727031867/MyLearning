@@ -1,7 +1,7 @@
 package com.gxf.demo.controller;
 
-import com.gxf.demo.enumeration.RabbitMqExchangeEnumeration;
-import com.gxf.demo.enumeration.RoutingKeyEnumeration;
+import com.gxf.demo.enumeration.RabbitMqExchangeEnum;
+import com.gxf.demo.enumeration.RoutingKeyEnum;
 import com.gxf.demo.service.MessageQueueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class HelloController {
 
     @GetMapping("/sendMsg")
     public String testMessageQueue() {
-        messageQueueService.sendMessageWithRoutingKeyAndExchangeKey(RabbitMqExchangeEnumeration.DIRECT_EXCHANGE, RoutingKeyEnumeration.DIRECT_KEY, "Hello Word!");
+        messageQueueService.sendMessageWithRoutingKeyAndExchangeKey(RabbitMqExchangeEnum.DIRECT_EXCHANGE, RoutingKeyEnum.DIRECT_KEY, "Hello Word!");
         return "OK";
     }
 

@@ -7,34 +7,29 @@ import lombok.extern.slf4j.Slf4j;
  * @author GXF
  */
 @Slf4j
-public enum RabbitMqExchangeEnumeration {
+public enum RabbitMqExchangeEnum {
     /**
      * 直连类型的交换
      */
-    DIRECT_EXCHANGE("DIRECT_EXCHANGE", "直连模式"),
+    DIRECT_EXCHANGE("DIRECT_EXCHANGE"),
 
     /**
      * 主题类型的交换机
      */
-    TOPIC_EXCHANGE("TOPIC_EXCHANGE", "主题模式"),
+    TOPIC_EXCHANGE("TOPIC_EXCHANGE"),
 
     /**
      * 广播类型的交换机
      */
-    FANOUT_EXCHANGE("FANOUT_EXCHANGE", "广播模式"),
+    FANOUT_EXCHANGE("FANOUT_EXCHANGE"),
     ;
 
     private final String code;
-    private final String name;
 
-    RabbitMqExchangeEnumeration(String code, String name) {
+    RabbitMqExchangeEnum(String code) {
         this.code = code;
-        this.name = name;
     }
     public String getCode() {
         return code;
-    }
-    public String getName() {
-        return name;
     }
 }

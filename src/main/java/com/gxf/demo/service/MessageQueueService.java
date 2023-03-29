@@ -1,7 +1,7 @@
 package com.gxf.demo.service;
 
-import com.gxf.demo.enumeration.RabbitMqExchangeEnumeration;
-import com.gxf.demo.enumeration.RoutingKeyEnumeration;
+import com.gxf.demo.enumeration.RabbitMqExchangeEnum;
+import com.gxf.demo.enumeration.RoutingKeyEnum;
 
 /**
  * @author GXF
@@ -22,5 +22,5 @@ public interface MessageQueueService {
      * @param routingKey     发到交换机路由的key
      * @param message 发送的文本消息内容
      */
-    void sendMessageWithRoutingKeyAndExchangeKey(RabbitMqExchangeEnumeration exchangeKey, RoutingKeyEnumeration routingKey, String message);
+    void sendMessageWithRoutingKeyAndExchangeKey(RabbitMqExchangeEnum exchangeKey, RoutingKeyEnum routingKey, String message);
 }

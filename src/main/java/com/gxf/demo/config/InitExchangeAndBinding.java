@@ -1,8 +1,8 @@
 package com.gxf.demo.config;
 
-import com.gxf.demo.enumeration.RabbitMqExchangeEnumeration;
+import com.gxf.demo.enumeration.RabbitMqExchangeEnum;
 import com.gxf.demo.enumeration.RabbitMqQueueEnum;
-import com.gxf.demo.enumeration.RoutingKeyEnumeration;
+import com.gxf.demo.enumeration.RoutingKeyEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class InitExchangeAndBinding {
     @Bean("rabbitMqDirectExchange")
     protected DirectExchange createRabbitMqDirectExchange() {
         // 持久交换机，在应用重启后依旧可以保留此交换机
-        DirectExchange exchange = new DirectExchange(RabbitMqExchangeEnumeration.DIRECT_EXCHANGE.getCode(), true, false);
+        DirectExchange exchange = new DirectExchange(RabbitMqExchangeEnum.DIRECT_EXCHANGE.getCode(), true, false);
         amqpAdmin.declareExchange(exchange);
         log.info("rabbitMq direct exchange created successfully!");
         return exchange;
@@ -40,7 +40,7 @@ public class InitExchangeAndBinding {
      */
     @Bean("rabbitMqTopicExchange")
     protected TopicExchange createRabbitMqTopicExchange() {
-        TopicExchange exchange = new TopicExchange(RabbitMqExchangeEnumeration.TOPIC_EXCHANGE.getCode(), true, false);
+        TopicExchange exchange = new TopicExchange(RabbitMqExchangeEnum.TOPIC_EXCHANGE.getCode(), true, false);
         amqpAdmin.declareExchange(exchange);
         log.info("rabbitMq topic exchange created successfully!");
         return exchange;
@@ -51,7 +51,7 @@ public class InitExchangeAndBinding {
      */
     @Bean("rabbitMqFanoutExchange")
     protected FanoutExchange createRabbitMqFanoutExchange() {
-        FanoutExchange exchange = new FanoutExchange(RabbitMqExchangeEnumeration.FANOUT_EXCHANGE.getCode(), true, false);
+        FanoutExchange exchange = new FanoutExchange(RabbitMqExchangeEnum.FANOUT_EXCHANGE.getCode(), true, false);
         amqpAdmin.declareExchange(exchange);
         log.info("rabbitMq fanout exchange created successfully!");
         return exchange;
@@ -93,7 +93,7 @@ public class InitExchangeAndBinding {
     @Bean
     protected Binding bindingDirectQueue(Queue rabbitMqDirectQueue, DirectExchange rabbitMqDirectExchange) {
         //绑定结构：队列-交换机-路由key
-        Binding binding = BindingBuilder.bind(rabbitMqDirectQueue).to(rabbitMqDirectExchange).with(RoutingKeyEnumeration.DIRECT_KEY.getCode());
+        Binding binding = BindingBuilder.bind(rabbitMqDirectQueue).to(rabbitMqDirectExchange).with(RoutingKeyEnum.DIRECT_KEY.getCode());
         amqpAdmin.declareBinding(binding);
         log.debug("direct queue binding created successfully!");
         return binding;
@@ -101,7 +101,7 @@ public class InitExchangeAndBinding {
 
     @Bean
     protected Binding bindingTopicQueue(Queue rabbitMqTopicQueue, TopicExchange rabbitMqTopicExchange) {
-        Binding binding = BindingBuilder.bind(rabbitMqTopicQueue).to(rabbitMqTopicExchange).with(RoutingKeyEnumeration.TOPIC_KEY.getCode());
+        Binding binding = BindingBuilder.bind(rabbitMqTopicQueue).to(rabbitMqTopicExchange).with(RoutingKeyEnum.TOPIC_KEY.getCode());
         amqpAdmin.declareBinding(binding);
         log.debug("topic queue binding created successfully!");
         return binding;
