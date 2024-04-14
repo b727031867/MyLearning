@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.io.FileInputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -31,6 +33,13 @@ class TestByteBuffer {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("读取文件测试失败！", e);
+        }
+    }
+
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 1, j = 10, k = 0; i < 6; i++, j--, k++) {
+            map.put(i + "+" + j, k);
         }
     }
 

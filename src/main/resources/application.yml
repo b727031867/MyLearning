@@ -3,14 +3,19 @@ debug: true
 server:
   port: 8000
 spring:
+  mvc:
+    format:
+      date-time: "yyyy-mm-dd HH:mm:ss"
+    servlet:
+      path: /gxf
   application:
     name: demo
   rabbitmq:
-    host: localhost
+    host: 192.168.5.150
     port: 5672
-    virtual-host: /demo
-    username: root
-    password: root
+    virtual-host: /
+    username: admin
+    password: admin
     # 异步确认回调
     publisher-confirm-type: correlated
     # 需要ack
@@ -19,13 +24,15 @@ spring:
       # 投递失败时 调用 ReturnCallback
       mandatory: true
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/demo
+    url: jdbc:mysql://192.168.5.150:3306/demo
     username: root
     password: root
   redis:
-    host: localhost
+    host: 192.168.5.150
     port: 6379
-    password: 123GONG123
+    password: root
     ssl: false
     database: 0
+logstash:
+  server-url: "192.168.5.150:5044"
 

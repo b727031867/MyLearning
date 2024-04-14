@@ -22,13 +22,13 @@
         <gson.version>2.10.1</gson.version>
         <guava.version>31.1-jre</guava.version>
         <netty.version>4.1.91.Final</netty.version>
+        <logback-encoder.version>7.3</logback-encoder.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -112,7 +112,12 @@
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
-
+        <!-- logback 推送日志文件到logstash -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logback-encoder.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
