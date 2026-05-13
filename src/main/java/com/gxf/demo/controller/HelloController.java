@@ -29,7 +29,7 @@ public class HelloController {
         log.info("info log");
         log.warn("warn log");
         log.error("error log");
-        return "Hello Word!";
+        return "Hello World!";
     }
 
     @GetMapping("/sendMsg")
