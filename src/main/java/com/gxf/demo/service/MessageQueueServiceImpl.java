@@ -31,4 +31,19 @@ public class MessageQueueServiceImpl implements MessageQueueService {
     public void sendMessageWithRoutingKeyAndExchangeKey(RabbitMqExchangeEnum exchangeKey, RoutingKeyEnum routingKey, String message) {
         amqpTemplate.send(exchangeKey.getCode(), routingKey.getCode(), new Message(message.getBytes(StandardCharsets.UTF_8)));
     }
+
+    @Override
+    public void sendTopicMessage(String routingKey, String message) {
+        amqpTemplate.convertAndSend(RabbitMqExchangeEnum.TOPIC_EXCHANGE.getCode(), routingKey, message);
+    }
+
+    @Override
+    public void sendFanoutMessage(String message) {
+        amqpTemplate.convertAndSend(RabbitMqExchangeEnum.FANOUT_EXCHANGE.getCode(), "", message);
+    }
+
+    @Override
+    public void sendObjectMessage(RabbitMqExchangeEnum exchange, RoutingKeyEnum routingKey, Object object) {
+        amqpTemplate.convertAndSend(exchange.getCode(), routingKey.getCode(), object);
+    }
 }
